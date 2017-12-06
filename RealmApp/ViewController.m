@@ -12,8 +12,8 @@
 
 @interface OrderMain:NSObject
 @property (nonatomic,copy) NSString *orderId;
-@property (nonatomic,copy) NSString *sumAmount;
-@property (nonatomic,copy) NSString *sumCount;
+@property (nonatomic,assign) float sumAmount;
+@property (nonatomic,assign) int   sumCount;
 @property (nonatomic,copy) NSString *states;
 - (NSDictionary *)properties_aps;
 @end
@@ -57,9 +57,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     orderMain = [[OrderMain alloc] init];
-    orderMain.sumAmount = @"120";
+    orderMain.sumCount = arc4random() % 100;
     orderMain.states = @"Y";
-    orderMain.sumCount  = @"10";
+    orderMain.sumAmount  = (arc4random() % 501) + 1500;
 }
 
 - (IBAction)getBtnClick:(id)sender {
