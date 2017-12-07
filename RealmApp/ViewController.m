@@ -42,6 +42,7 @@
 
 @interface ViewController (){
     OrderMain *orderMain;
+    UILabel *messageText;
 }
 @property (weak, nonatomic) IBOutlet UITextField *ipText;
 @property (weak, nonatomic) IBOutlet UITextField *portText;
@@ -60,6 +61,12 @@
     orderMain.sumCount = arc4random() % 100;
     orderMain.states = @"Y";
     orderMain.sumAmount  = (arc4random() % 501) + 1500;
+    messageText = [[UILabel alloc] init];
+    [messageText setBackgroundColor:[UIColor grayColor]];
+    [messageText setTextColor:[UIColor redColor]];
+    messageText.numberOfLines = 0;
+    [messageText setFrame:CGRectMake(15, [UIScreen mainScreen].bounds.size.height - 220, [UIScreen mainScreen].bounds.size.width - 30, 200)];
+    [self.view addSubview:messageText];
 }
 
 - (IBAction)getBtnClick:(id)sender {
@@ -67,8 +74,10 @@
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     [session GET:urlStr parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"请求成功%@",responseObject);
+        messageText.text = [NSString stringWithFormat:@"请求成功%@",responseObject];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"请求失败");
+        messageText.text = [NSString stringWithFormat:@"请求失败%@",error];
     }];
 }
 - (IBAction)postBtnClick:(id)sender {
@@ -83,8 +92,10 @@
     
     [session POST:urlStr parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"请求成功%@",responseObject);
+        messageText.text = [NSString stringWithFormat:@"请求成功%@",responseObject];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"请求失败");
+        messageText.text = [NSString stringWithFormat:@"请求失败%@",error];
     }];
     /**
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
