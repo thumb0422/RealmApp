@@ -70,6 +70,7 @@
 }
 
 - (IBAction)getBtnClick:(id)sender {
+    messageText.text = @"";
     NSString *urlStr = [NSString stringWithFormat:@"%@:%@/%@",_ipText.text,_portText.text,_funcText.text];
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     [session GET:urlStr parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -81,6 +82,7 @@
     }];
 }
 - (IBAction)postBtnClick:(id)sender {
+    messageText.text = @"";
     NSString *urlStr = [NSString stringWithFormat:@"%@:%@/%@",_ipText.text,_portText.text,_funcText.text];
     
     NSDictionary *params = [orderMain properties_aps];
